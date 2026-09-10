@@ -13,6 +13,7 @@ class AlarmTest(PT.TableBase):
     out_pini_no = PT.Parameter()
     out_pini_yes = PT.Parameter()
     # Input parameters
+    in_mbbi_direct = PT.Parameter(iointr=True)
     in_pini_no = PT.Parameter(iointr=True)
     in_pini_yes = PT.Parameter(iointr=True)
 
@@ -70,11 +71,14 @@ class AlarmTest(PT.TableBase):
                 break
             if self.count is None:
                 continue
+            self.in_mbbi_direct.value = self.count
+            self.set_alarms(self.in_mbbi_direct, None)
             self.in_pini_no.value = self.count
             self.in_pini_yes.value = self.count
             self.set_alarms(self.in_pini_no, self.in_pini_yes)
             self.in_pini_no.notify()
             self.in_pini_yes.notify()
+            self.in_mbbi_direct.notify()
             print("in_pini_no", self.in_pini_no.value)
             print("in_pini_yes", self.in_pini_yes.value)
 
