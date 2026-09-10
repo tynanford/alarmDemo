@@ -1,14 +1,48 @@
-record(ai, "PINI:NO") {
+record(longout, "TIMER") {
     field(PINI, "NO")
     field(DTYP, "Python Device")
-    field(INP,  "@devsup.ptable alarm set pini_no")
-    field(SCAN, "I/O Intr")
-    field(VAL,  "55")
+    field(OUT,  "@devsup.ptable alarm set timer")
+    #field(VAL,  "3")
+    field(SCAN, "5 second")
 }
-record(ai, "PINI:YES") {
+
+record(longout, "OUT_PINI:YES") {
     field(PINI, "YES")
     field(DTYP, "Python Device")
-    field(INP,  "@devsup.ptable alarm set pini_yes")
+    field(OUT,  "@devsup.ptable alarm set out_pini_yes")
+    field(VAL,  "4")
+}
+
+record(waveform, "OUT_PINI:NO") {
+    field(PINI, "NO")
+    field(FTVL, "LONG")
+    # NB, an array needs to have at least two elements. Or it is not an array.
+    field(NELM, "2")
+    field(DTYP, "Python Device")
+    # NB, waveform does not have an OUT field.
+    field(INP,  "@devsup.ptable alarm set out_pini_no")
+}
+
+record(mbbiDirect, "IN_MBBI:DIRECT") {
+    field(PINI, "NO")
+    field(DTYP, "Python Device")
+    field(INP,  "@devsup.ptable alarm get in_mbbi_direct")
+    #field(VAL,  "5")
     field(SCAN, "I/O Intr")
-    field(VAL,  "55")
+}
+
+record(longin, "IN_PINI:NO") {
+    field(PINI, "NO")
+    field(DTYP, "Python Device")
+    field(INP,  "@devsup.ptable alarm get in_pini_no")
+    #field(VAL,  "6")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin, "IN_PINI:YES") {
+    field(PINI, "YES")
+    field(DTYP, "Python Device")
+    field(INP,  "@devsup.ptable alarm get in_pini_yes")
+    #field(VAL,  "7")
+    field(SCAN, "I/O Intr")
 }
