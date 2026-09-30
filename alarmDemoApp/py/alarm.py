@@ -17,19 +17,23 @@ class AlarmTest(PT.TableBase):
     ao_val_info = PT.Parameter(iointr=True)
     ai_rval_eslo = PT.Parameter(iointr=True)
     ai_val_eslo = PT.Parameter(iointr=True)
+    alarm_clear = PT.Parameter(iointr=True)
 
     def __init__(self, name):
         super().__init__(name=name)
         self.stop = False
         self.run_thread = Thread(target=self._run)
+        self.alarm_clear_thread = Thread(target=self._alarm_clear_demo)
 
     def start(self):
         self.run_thread.start()
+        self.alarm_clear_thread.start()
 
     def stop_threads(self):
         print("stopping threads")
         self.stop = True
         self.run_thread.join()
+        self.alarm_clear_thread.join()
 
     def _run(self):
         count = 0
@@ -76,6 +80,26 @@ class AlarmTest(PT.TableBase):
 
             count += 1
             time.sleep(5)
+
+    def _alarm_clear_demo(self):
+        while not self.stop:
+            self.alarm_clear.value = 1
+            self.alarm_clear.notify()
+            time.sleep(2)
+
+            self.alarm_clear.alarm = MAJOR_ALARM
+            self.alarm_clear.notify()
+            time.sleep(2)
+
+            # only value is changed. on pyDevSup master branch this clears the MAJOR_ALARM
+            # with PR 52, the PV stays in MAJOR_ALARM
+            self.alarm_clear.value = 5
+            self.alarm_clear.notify()
+            time.sleep(2)
+
+            self.alarm_clear.value = None
+            self.alarm_clear.notify()
+            time.sleep(2)
 
 def build():
     sup = AlarmTest(name="alarm")

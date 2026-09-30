@@ -90,3 +90,9 @@ record(ai, "TEST:AI:VAL:ESLO") {
     field(ESLO, "2")
     field(EOFF, "1")
 }
+
+record(ai, "TEST:ALARM:CLEAR") {
+    field(DTYP, "Python Device")
+    field(INP,  "@devsup.ptable alarm set alarm_clear")
+    field(SCAN, "I/O Intr")
+}
