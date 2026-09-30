@@ -11,4 +11,82 @@ record(ai, "PINI:YES") {
     field(INP,  "@devsup.ptable alarm set pini_yes")
     field(SCAN, "I/O Intr")
     field(VAL,  "55")
+    field(LOLO, "3")
+    field(LLSV, "MAJOR")
+    field(LOW,  "5")
+    field(LSV,  "MINOR")
+    field(HIGH, "8")
+    field(HSV,  "MINOR")
+    field(HIHI,  "10")
+    field(HHSV, "MAJOR")
+}
+
+record(ai, "TEST:ALARM") {
+    field(PINI, "YES")
+    field(VAL,  "10")
+    field(LOLO, "20")
+    field(LLSV, "MAJOR")
+    field(LOW,  "20")
+    field(LSV,  "MINOR")
+    field(HIGH, "50")
+    field(HSV,  "MINOR")
+    field(HIHI,  "60")
+    field(HHSV, "MAJOR")
+}
+
+record(ai, "TEST:AI:SET42") {
+    field(DTYP, "Python Device")
+    field(INP,  "@devsup.ptable alarm set ai_42")
+    field(SCAN, "I/O Intr")
+}
+
+record(ao, "TEST:AO:SET42") {
+    field(DTYP, "Python Device")
+    field(OUT,  "@devsup.ptable alarm set ao_42")
+    field(SCAN, "I/O Intr")
+}
+
+record(ai, "TEST:AI:RVAL:INFO") {
+    field(DTYP, "Python Device")
+    field(INP,  "@devsup.ptable alarm set ai_rval_info")
+    field(SCAN, "I/O Intr")
+    info("pyfield", "RVAL")
+}
+record(ao, "TEST:AO:RVAL:INFO") {
+    field(DTYP, "Python Device")
+    field(OUT,  "@devsup.ptable alarm set ao_rval_info")
+    field(SCAN, "I/O Intr")
+    info("pyfield", "RVAL")
+}
+
+record(ai, "TEST:AI:VAL:INFO") {
+    field(DTYP, "Python Device")
+    field(INP,  "@devsup.ptable alarm set ai_val_info")
+    field(SCAN, "I/O Intr")
+    info("pyfield", "VAL")
+}
+record(ao, "TEST:AO:VAL:INFO") {
+    field(DTYP, "Python Device")
+    field(OUT,  "@devsup.ptable alarm set ao_val_info")
+    field(SCAN, "I/O Intr")
+    info("pyfield", "VAL")
+}
+
+record(ai, "TEST:AI:RVAL:ESLO") {
+    field(DTYP, "Python Device")
+    field(INP,  "@devsup.ptable alarm set ai_rval_eslo")
+    field(SCAN, "I/O Intr")
+    info("pyfield", "RVAL")
+    field(LINR, "SLOPE")
+    field(ESLO, "2")
+    field(EOFF, "1")
+}
+record(ai, "TEST:AI:VAL:ESLO") {
+    field(DTYP, "Python Device")
+    field(INP,  "@devsup.ptable alarm set ai_val_eslo")
+    field(SCAN, "I/O Intr")
+    info("pyfield", "VAL")
+    field(LINR, "SLOPE")
+    field(ESLO, "2")
+    field(EOFF, "1")
 }
